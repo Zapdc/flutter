@@ -69,3 +69,32 @@ const camera = "Canon M50 Mark II",
     watches = "Wolf Analog Watch",
     refrigerator = "Motorola Refrigerator";
 
+//item details strings
+const reviews = "Reviews",
+    sellerPolicy = "Seller Policy",
+    returnpolicy = "Return Policy",
+    supportpolicy = "Support Policy",
+    productsyoumaylike = "Products you may also like";
+
+//profile strings
+const wishlist = "My Wishlist",
+    orders = "My Orders",
+    messages = "Messages";
+
+//products category
+const babyclothes = "Dhoti & Kurta Set",
+    helicopter = "Funkey Helicopter",
+    dipers = "Active Diaper Pants",
+    girldress = "Girls Casual Dress",
+    bottle = "Kids School water Bottle",
+    book = "Board Book All In One";
+
+//babyclothes
+const baby1 = "Baby Boys Casual Wear",
+    baby2 = "Baby Boys Casual T-shirt",
+    baby3 = "Baby Boys & Girls Party Wear",
+    baby4 = "T-shirt Dungaree",
+    baby5 = "Dungaree For Baby Boys & Girls",
+    baby6 = "Baby Girls Midi Length Dress";
+
+

@@ -57,6 +57,7 @@ class LoginScreen extends StatelessWidget{
                     child: CircleAvatar(
                       backgroundColor: lightGrey,
                       radius: 25,
+                      //social buttons
                       child: Image.asset(socialIconList[index],
                       width: 30,),
                     ),

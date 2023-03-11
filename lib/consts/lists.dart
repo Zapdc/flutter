@@ -25,3 +25,16 @@ const homeProductList = [camera,football,pad,sweater,watches,refrigerator];
 const homeProductListImages = [imgA2,imgA1,imgA3,imgA4,imgA5,imgA6];
 const homeProductListPrice = ["\₹57,990","\₹349","\₹15,999","\₹749","\₹1,999","\₹54,799"];
 
+const babyProductList = [babyclothes,helicopter,dipers,girldress,bottle,book];
+const babyProductListImages = [imgC1,imgC2,imgC3,imgC4,imgC5,imgC6];
+const babyProductListPrice = ["\₹172","\₹410","\₹593","\₹244","\₹275","\₹179"];
+
+const babyClothstList = [baby1,baby2,baby3,baby4,baby5,baby6];
+const babyClothsListImages = [imgD1,imgD2,imgD3,imgD4,imgD5,imgD6];
+const babyClothsListPrice = ["\₹172","\₹410","\₹593","\₹244","\₹275","\₹179"];
+
+const itemDetailButtonsList = [reviews,privacyPolicy,returnpolicy,supportpolicy];
+
+const profileButtonsList = [orders,wishlist,messages];
+const profileButtonsIcons = [icOrder,icOrder,icMessages];
+

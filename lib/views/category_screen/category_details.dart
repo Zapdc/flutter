@@ -1,4 +1,7 @@
+import 'package:get/get.dart';
 import 'package:goan_market/consts/consts.dart';
+import 'package:goan_market/consts/lists.dart';
+import 'package:goan_market/views/category_screen/item_details.dart';
 import 'package:goan_market/widgets_common/bg_widget.dart';
 
 class CategoryDetails extends StatelessWidget{
@@ -35,6 +38,31 @@ class CategoryDetails extends StatelessWidget{
                               .make()),
                 ),
               ),
+
+              //items container
+
+              20.heightBox,
+
+              Expanded(child: GridView.builder(
+                physics: const BouncingScrollPhysics(),
+                shrinkWrap: true,
+                  itemCount: 6,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisExtent: 250,mainAxisSpacing: 8, crossAxisSpacing: 8),
+                  itemBuilder: (context,index){
+                    return Column(
+                      // crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Image.asset(babyProductListImages[index],height: 150, width: 200, fit: BoxFit.fitHeight),
+                        10.heightBox,
+                        babyProductList[index].text.fontFamily(bold).color(darkFontGrey).make(),
+                        10.heightBox,
+                        babyProductListPrice[index].text.fontFamily(bold).color(Colors.red).size(16).make(),
+
+                      ],
+                    ).box.white.margin(const EdgeInsets.symmetric(horizontal: 4)).roundedSM.outerShadowSm.padding(const EdgeInsets.all(12)).make().onTap(() {
+                      Get.to(()=>const ItemDetails(title: "Boys Festive & Party Dhoti & Kurta Set  (White Pack of 1)"));
+                    });
+              }))
             ],
           ),
         ),

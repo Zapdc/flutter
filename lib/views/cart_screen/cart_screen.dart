@@ -5,6 +5,9 @@ class CartScreen extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
-    return Container(color: Colors.cyan);
+    return Container(
+        color: Colors.white,
+        child: "Cart is Empty!".text.fontFamily(bold).color(darkFontGrey).makeCentered(),
+    );
   }
 }
