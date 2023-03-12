@@ -36,6 +36,11 @@ dependencies:
   cupertino_icons: ^1.0.2
   velocity_x: ^3.5.1
   get: ^4.6.5
+  firebase_core: ^2.7.1
+  firebase_auth: ^4.2.10
+  firebase_storage: ^11.0.15
+  cloud_firestore: ^4.4.4
+  image_picker: ^0.8.7
 
 
 dev_dependencies:
