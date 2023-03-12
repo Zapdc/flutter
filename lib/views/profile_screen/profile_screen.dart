@@ -47,7 +47,7 @@ class ProfileScreen extends StatelessWidget{
                   //user details section
                   Row(
                     children: [
-                      Image.asset(imgProfile2, width: 100,fit: BoxFit.cover).box.roundedFull.clip(Clip.antiAlias).make(),
+                      Image.asset(imgProfile2, width: 80,fit: BoxFit.cover).box.roundedFull.clip(Clip.antiAlias).make(),
                       10.widthBox,
                       Expanded(child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
