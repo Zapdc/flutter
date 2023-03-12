@@ -33,7 +33,9 @@ class ProfileScreen extends StatelessWidget{
                   valueColor: AlwaysStoppedAnimation(blueColor),
                 ),);
             }else {
+
               var data = snapshot.data!.docs[0];
+
               return SafeArea(child: Column(
                 children: [
 
@@ -42,12 +44,19 @@ class ProfileScreen extends StatelessWidget{
                   const Align(
                       alignment: Alignment.topRight,
                       child: Icon(Icons.edit,color: whiteColor)).onTap(() {
+                    controller.nameController.text = data['name'];
+
                     Get.to(() => EditProfileScreen(data: data));
                   }),
                   //user details section
                   Row(
                     children: [
-                      Image.asset(imgProfile2, width: 100,fit: BoxFit.cover).box.roundedFull.clip(Clip.antiAlias).make(),
+
+                      data['imageUrl'] == '' ?
+
+                      Image.asset(imgProfile2, width: 100,fit: BoxFit.cover).box.roundedFull.clip(Clip.antiAlias).make()
+                      :
+                      Image.network(data['imageUrl'], width: 100,fit: BoxFit.cover).box.roundedFull.clip(Clip.antiAlias).make(),
                       10.widthBox,
                       Expanded(child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

@@ -24,7 +24,7 @@ const home = "Home";
 const categories = "Categories";
 const cart = "Cart";
 const account = "Account";
-
+const oldpass = "Old password", newpass = "New Password";
 //home screen
 const searchanything = "Search for Products";
 const todaydeal = "Today's Deal";

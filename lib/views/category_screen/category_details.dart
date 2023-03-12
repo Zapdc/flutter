@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:goan_market/consts/consts.dart';
 import 'package:goan_market/consts/lists.dart';
+import 'package:goan_market/controllers/product_controller.dart';
 import 'package:goan_market/views/category_screen/item_details.dart';
 import 'package:goan_market/widgets_common/bg_widget.dart';
 
@@ -10,6 +11,9 @@ class CategoryDetails extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
+
+    var controller = Get.find<ProductController>();
+
     return bgWidget(
       child: Scaffold(
         appBar: AppBar(
@@ -23,8 +27,8 @@ class CategoryDetails extends StatelessWidget{
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: List.generate(6,
-                          (index) => "Baby Clothing"
+                  children: List.generate(controller.subcat.length,
+                          (index) => "${controller.subcat[index]}"
                               .text
                               .size(12)
                               .fontFamily(bold)
