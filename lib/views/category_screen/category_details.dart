@@ -18,6 +18,7 @@ class CategoryDetails extends StatelessWidget{
         body: Container(
           padding: const EdgeInsets.all(12),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start ,
             children: [
               SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
