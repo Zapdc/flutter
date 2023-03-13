@@ -48,7 +48,7 @@ const womenClothing = "Women Clothing",
     kidtoys = "Kids & Toys",
     sports = "Sports",
     jewelery = "Jewelery",
-    cellphone = "Smartphones",
+    cellphone = "Cellphone & Tab",
     personalCare = "Personal Care",
     appliances = "Appliances";
 
