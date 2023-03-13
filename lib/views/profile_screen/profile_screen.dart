@@ -22,85 +22,94 @@ class ProfileScreen extends StatelessWidget{
 
     return bgWidget(
       child: Scaffold(
-        body: StreamBuilder(
-          stream: FirestoreServices.getUser(currentUser!.uid),
+          body: StreamBuilder(
+              stream: FirestoreServices.getUser(currentUser!.uid),
 
-          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
+              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
 
-            if(!snapshot.hasData){
-              return const Center(
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation(blueColor),
-                ),);
-            }else {
-              var data = snapshot.data!.docs[0];
-              return SafeArea(child: Column(
-                children: [
+                if(!snapshot.hasData){
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation(blueColor),
+                    ),);
+                }else {
 
-                  //edit profile button
+                  var data = snapshot.data!.docs[0];
 
-                  const Align(
-                      alignment: Alignment.topRight,
-                      child: Icon(Icons.edit,color: whiteColor)).onTap(() {
-                    Get.to(() => EditProfileScreen(data: data));
-                  }),
-                  //user details section
-                  Row(
+                  return SafeArea(child: Column(
                     children: [
-                      Image.asset(imgProfile2, width: 80,fit: BoxFit.cover).box.roundedFull.clip(Clip.antiAlias).make(),
-                      10.widthBox,
-                      Expanded(child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+
+                      //edit profile button
+
+                      const Align(
+                          alignment: Alignment.topRight,
+                          child: Icon(Icons.edit,color: whiteColor)).onTap(() {
+                        controller.nameController.text = data['name'];
+
+                        Get.to(() => EditProfileScreen(data: data));
+                      }),
+                      //user details section
+                      Row(
                         children: [
-                          "${data['name']}".text.fontFamily(bold).white.make(),
-                          5.heightBox,
-                          "${data['email']}".text.size(12).white.make(),
+
+                          data['imageUrl'] == '' ?
+
+                          Image.asset(imgProfile2, width: 100,fit: BoxFit.cover).box.roundedFull.clip(Clip.antiAlias).make()
+                              :
+                          Image.network(data['imageUrl'], width: 100,fit: BoxFit.cover).box.roundedFull.clip(Clip.antiAlias).make(),
+                          10.widthBox,
+                          Expanded(child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              "${data['name']}".text.fontFamily(bold).white.make(),
+                              5.heightBox,
+                              "${data['email']}".text.size(12).white.make(),
+                            ],
+                          )),
+                          OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                                side: const BorderSide(
+                                  color: whiteColor,
+                                )
+                            ),
+                            onPressed: () async{
+                              await Get.put(AuthController()).signoutMethod(context);
+                              Get.offAll(() => const LoginScreen());
+                            },
+                            child: "Log out".text.fontFamily(bold).white.make(),)
                         ],
-                      )),
-                      OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                            side: const BorderSide(
-                              color: whiteColor,
-                            )
-                        ),
-                        onPressed: () async{
-                          await Get.put(AuthController()).signoutMethod(context);
-                          Get.offAll(() => const LoginScreen());
-                        },
-                        child: "Log out".text.fontFamily(bold).white.make(),)
-                    ],
-                  ),
+                      ),
 
-                  20.heightBox,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      detailsCard(count: data['cart_count'],title: "In your cart",width: context.screenWidth/3.4),
-                      detailsCard(count: data['wishlist_count'],title: "In your wishlist",width: context.screenWidth/3.4),
-                      detailsCard(count: data['order_count'],title: "Your orders",width: context.screenWidth/3.4),
-                    ],
-                  ),
+                      20.heightBox,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          detailsCard(count: data['cart_count'],title: "In your cart",width: context.screenWidth/3.4),
+                          detailsCard(count: data['wishlist_count'],title: "In your wishlist",width: context.screenWidth/3.4),
+                          detailsCard(count: data['order_count'],title: "Your orders",width: context.screenWidth/3.4),
+                        ],
+                      ),
 
-                  //buttons section
-                  ListView.separated(
-                      shrinkWrap: true,
-                      separatorBuilder: (context,index){
-                        return const Divider(
-                          color: lightGrey,
-                        );
-                      },
-                      itemCount: profileButtonsList.length,
-                      itemBuilder: (BuildContext context,int index){
-                        return ListTile(
-                          leading: Image.asset(profileButtonsIcons[index],width: 22,),
-                          title: profileButtonsList[index].text.fontFamily(bold).color(darkFontGrey).make(),
-                        );
-                      }).box.white.rounded.margin(const EdgeInsets.all(12)).padding(const EdgeInsets.symmetric(horizontal: 16)).shadowSm.make().box.color(lightblue).make(),
-                ],
-              ));
-            }
-          }
-        )
+                      //buttons section
+                      ListView.separated(
+                          shrinkWrap: true,
+                          separatorBuilder: (context,index){
+                            return const Divider(
+                              color: lightGrey,
+                            );
+                          },
+                          itemCount: profileButtonsList.length,
+                          itemBuilder: (BuildContext context,int index){
+                            return ListTile(
+                              leading: Image.asset(profileButtonsIcons[index],width: 22,),
+                              title: profileButtonsList[index].text.fontFamily(bold).color(darkFontGrey).make(),
+                            );
+                          }).box.white.rounded.margin(const EdgeInsets.all(12)).padding(const EdgeInsets.symmetric(horizontal: 16)).shadowSm.make().box.color(lightblue).make(),
+                    ],
+                  ));
+                }
+              }
+          )
       ),
     );
   }

@@ -24,7 +24,7 @@ const home = "Home";
 const categories = "Categories";
 const cart = "Cart";
 const account = "Account";
-
+const oldpass = "Old password", newpass = "New Password";
 //home screen
 const searchanything = "Search for Products";
 const todaydeal = "Today's Deal";
@@ -43,12 +43,12 @@ const featuredCategories = "Featured Categories";
 
 //category string
 const womenClothing = "Women Clothing",
-     menClothingFashion = "Men Clothing",
+    menClothingFashion = "Men Clothing",
     electronics = "Electronics",
     kidtoys = "Kids & Toys",
     sports = "Sports",
     jewelery = "Jewelery",
-    cellphone = "Smartphones",
+    cellphone = "Cellphone & Tab",
     personalCare = "Personal Care",
     appliances = "Appliances";
 
@@ -97,5 +97,4 @@ const baby1 = "Baby Boys Casual Wear",
     baby4 = "T-shirt Dungaree",
     baby5 = "Dungaree For Baby Boys & Girls",
     baby6 = "Baby Girls Midi Length Dress";
-
 

@@ -5,6 +5,7 @@ import 'package:goan_market/views/cart_screen/cart_screen.dart';
 import 'package:goan_market/views/category_screen/category_screen.dart';
 import 'package:goan_market/views/home_screen/home_screen.dart';
 import 'package:goan_market/views/profile_screen/profile_screen.dart';
+import 'package:goan_market/widgets_common/exit_dailog.dart';
 
 class Home extends StatelessWidget{
 
@@ -31,23 +32,32 @@ class Home extends StatelessWidget{
     ];
 
 
-    return Scaffold(
-      body: Column(
-        children: [
-          Obx(()=>Expanded(child: navBody.elementAt(controller.currentNavIndex.value))),
-        ],
-      ),
-      bottomNavigationBar: Obx(()=>
-        BottomNavigationBar(
-          currentIndex: controller.currentNavIndex.value,
-          selectedItemColor: lightblue,
-          selectedLabelStyle: const TextStyle(fontFamily: bold),
-          backgroundColor: whiteColor,
-          type: BottomNavigationBarType.fixed,
-          items: navbarItem,
-          onTap: (value){
-            controller.currentNavIndex.value = value;
-          },
+    return WillPopScope(
+      onWillPop: () async {
+        showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (context) => exitDialog(context));
+        return false;
+      },
+      child: Scaffold(
+        body: Column(
+          children: [
+            Obx(()=>Expanded(child: navBody.elementAt(controller.currentNavIndex.value))),
+          ],
+        ),
+        bottomNavigationBar: Obx(()=>
+          BottomNavigationBar(
+            currentIndex: controller.currentNavIndex.value,
+            selectedItemColor: lightblue,
+            selectedLabelStyle: const TextStyle(fontFamily: bold),
+            backgroundColor: whiteColor,
+            type: BottomNavigationBarType.fixed,
+            items: navbarItem,
+            onTap: (value){
+              controller.currentNavIndex.value = value;
+            },
+          ),
         ),
       ),
     );
