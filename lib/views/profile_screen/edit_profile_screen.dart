@@ -1,9 +1,6 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:goan_market/consts/consts.dart';
 import 'package:goan_market/controllers/profile_controller.dart';
 import 'package:goan_market/widgets_common/bg_widget.dart';

@@ -1,6 +1,5 @@
 
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:goan_market/consts/consts.dart';
 import 'package:goan_market/consts/lists.dart';
 import 'package:goan_market/controllers/product_controller.dart';
@@ -121,7 +120,7 @@ class ItemDetails extends StatelessWidget {
                                         }),
                                          Visibility(
                                           visible: index == controller.colorIndex.value,
-                                            child: Icon(Icons.done, color: Colors.white))
+                                            child: const Icon(Icons.done, color: Colors.white))
                                       ],
                                     )),
                               ),

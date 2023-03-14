@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:goan_market/consts/consts.dart';
 import 'package:goan_market/controllers/cart_controller.dart';
 import 'package:goan_market/widgets_common/loading_indicator.dart';
@@ -89,7 +88,7 @@ class CartScreen extends StatelessWidget{
               ],
               )
                   .box
-                  .padding(EdgeInsets.all(12))
+                  .padding(const EdgeInsets.all(12))
         .color(lightGolden)
         .width(context.screenWidth-60)
         .roundedSM
