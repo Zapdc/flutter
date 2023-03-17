@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:goan_market/consts/consts.dart';
 import 'package:goan_market/consts/lists.dart';
 import 'package:goan_market/controllers/product_controller.dart';
+import 'package:goan_market/views/chat_screen/chat_screen.dart';
 import 'package:goan_market/widgets_common/our_button.dart';
 
 class ItemDetails extends StatelessWidget {
@@ -91,7 +92,9 @@ class ItemDetails extends StatelessWidget {
                         const CircleAvatar(
                           backgroundColor: Colors.white,
                           child: Icon(Icons.message_rounded, color: darkFontGrey),
-                        ),
+                        ).onTap(() {
+                          Get.to(()=>const ChatScreen());
+                        })
                       ],
                     ).box.height(60).padding(const EdgeInsets.symmetric(horizontal: 16)).color(textfieldGrey).make(),
 
