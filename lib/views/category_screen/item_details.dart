@@ -32,7 +32,17 @@ class ItemDetails extends StatelessWidget {
           title: title!.text.color(darkFontGrey).fontFamily(bold).make(),
           actions: [
             IconButton(onPressed: (){}, icon: const Icon(Icons.share)),
-            IconButton(onPressed: (){}, icon: const Icon(Icons.favorite_outline)),
+            IconButton(onPressed: (){
+              if(controller.isFav.value){
+                controller.removeFromWishList(data.id);
+                controller.isFav(false);
+              }else{
+                controller.addToWishList(data.id);
+                controller.isFav(true);
+              }
+
+            },
+                icon: const Icon(Icons.favorite_outline)),
 
           ],
         ),
@@ -93,7 +103,9 @@ class ItemDetails extends StatelessWidget {
                           backgroundColor: Colors.white,
                           child: Icon(Icons.message_rounded, color: darkFontGrey),
                         ).onTap(() {
-                          Get.to(()=>const ChatScreen());
+                          Get.to(()=>const ChatScreen(),
+                            arguments: [data['p_seller'], data['vendor_id']],
+                          );
                         })
                       ],
                     ).box.height(60).padding(const EdgeInsets.symmetric(horizontal: 16)).color(textfieldGrey).make(),

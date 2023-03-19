@@ -5,6 +5,12 @@ import 'package:goan_market/controllers/home_controller.dart';
 
 class ChatsController extends GetxController{
 
+@override
+  void onInit() {
+    getChatId();
+    super.onInit();
+  }
+
   var chats = firestore.collection(chatsCollection);
 
   var friendName = Get.arguments[0];
@@ -17,7 +23,11 @@ class ChatsController extends GetxController{
 
   dynamic chatDocId;
 
+  var isLoading = false.obs;
+
   getChatId() async{
+
+    isLoading(true);
 
     await chats.where('users', isEqualTo: {
       friendId: null,
@@ -45,6 +55,24 @@ class ChatsController extends GetxController{
     });
 
 
+  }
+
+  sendMsg(String msg) async{
+    if(msg.trim().isNotEmpty){
+      chats.doc(chatDocId).update({
+        'created_on': FieldValue.serverTimestamp(),
+        'last_msg': msg,
+        'toId': friendId,
+        'fromId': currentId,
+      });
+
+      chats.doc(chatDocId).collection(messagesCollection).doc().set({
+        'created_on': FieldValue.serverTimestamp(),
+        'msg': msg,
+        'uid': currentId,
+      });
+      isLoading(false);
+    }
   }
 
 }
