@@ -38,3 +38,6 @@ const itemDetailButtonsList = [reviews,privacyPolicy,returnpolicy,supportpolicy]
 const profileButtonsList = [orders,wishlist,messages];
 const profileButtonsIcons = [icOrder,icOrder,icMessages];
 
+const paymentMethodsImg = [imgPaypal, imgStripe, imgCod];
+const paymentMethods = [paypal, stripe, cod];
+

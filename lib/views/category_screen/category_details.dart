@@ -25,7 +25,7 @@ class CategoryDetails extends StatelessWidget{
             stream: FirestoreServices.getProducts(title),
 
             builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if(snapshot.hasData){
+              if(!snapshot.hasData){
                 return Center(
                   child: loadingIndicator(),
                 );
@@ -38,7 +38,7 @@ class CategoryDetails extends StatelessWidget{
                 var data = snapshot.data!.docs;
 
                 return Container(
-                  padding: const EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(8),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -75,15 +75,19 @@ class CategoryDetails extends StatelessWidget{
                             return Column(
                               // crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Image.network(data[index]['p_imgs'][0],height: 150, width: 200, fit: BoxFit.cover),
-                                10.heightBox,
+                                Image.network(data[index]['p_imgs'][0],height: 160, width: 200, fit: BoxFit.cover).box.roundedSM.clip(Clip.antiAlias).make(),
+                                5.heightBox,
                                 "${data[index]['p_name']}".text.fontFamily(bold).color(darkFontGrey).make(),
                                 10.heightBox,
                                 "${data[index]['p_price']}".numCurrency.text.fontFamily(bold).color(Colors.red).size(16).make(),
+                                10.heightBox,
 
                               ],
                             ).box.white.margin(const EdgeInsets.symmetric(horizontal: 4)).roundedSM.outerShadowSm.padding(const EdgeInsets.all(12)).make().onTap(() {
-                              Get.to(()=> ItemDetails(title: "${data[index]['p_name']}",data: data[index]));
+                              controller.checkIfFav(data[index]);
+                              Get.to(()=> ItemDetails(title: "${data[index]['p_name']}",data: data[index],
+                              ),
+                              );
                             });
                           }))
                     ],

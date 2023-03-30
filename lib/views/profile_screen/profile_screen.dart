@@ -6,8 +6,12 @@ import 'package:goan_market/controllers/auth_controller.dart';
 import 'package:goan_market/controllers/profile_controller.dart';
 import 'package:goan_market/services/firestore_services.dart';
 import 'package:goan_market/views/auth_screen/login_screen.dart';
+import 'package:goan_market/views/chat_screen/messaging_screen.dart';
+import 'package:goan_market/views/orders_screen/orders_screen.dart';
 import 'package:goan_market/views/profile_screen/components/details_card.dart';
+import 'package:goan_market/views/wishlist_screen/wishlist_screen.dart';
 import 'package:goan_market/widgets_common/bg_widget.dart';
+import 'package:goan_market/widgets_common/loading_indicator.dart';
 
 import 'edit_profile_screen.dart';
 
@@ -80,14 +84,32 @@ class ProfileScreen extends StatelessWidget{
                       ),
 
                       20.heightBox,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          detailsCard(count: data['cart_count'],title: "In your cart",width: context.screenWidth/3.4),
-                          detailsCard(count: data['wishlist_count'],title: "In your wishlist",width: context.screenWidth/3.4),
-                          detailsCard(count: data['order_count'],title: "Your orders",width: context.screenWidth/3.4),
-                        ],
-                      ),
+                      
+                      FutureBuilder(
+                          future: FirestoreServices.getCounts(),
+                          builder: (BuildContext context, AsyncSnapshot snapshot){
+                            if(!snapshot.hasData){
+                              return Center(child: loadingIndicator());
+                            }else{
+                              var countData = snapshot.data;
+                              return Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  detailsCard(count: countData[0].toString(),title: "In your cart",width: context.screenWidth/3.3),
+                                  detailsCard(count: countData[1].toString(),title: "In your wishlist",width: context.screenWidth/3.3),
+                                  detailsCard(count: countData[2].toString(),title: "Your orders",width: context.screenWidth/3.3),
+                                ],
+                              );
+                            }
+                          },),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      //   children: [
+                      //     detailsCard(count: data['cart_count'],title: "In your cart",width: context.screenWidth/3.3),
+                      //     detailsCard(count: data['wishlist_count'],title: "In your wishlist",width: context.screenWidth/3.3),
+                      //     detailsCard(count: data['order_count'],title: "Your orders",width: context.screenWidth/3.3),
+                      //   ],
+                      // ),
 
                       //buttons section
                       ListView.separated(
@@ -100,6 +122,19 @@ class ProfileScreen extends StatelessWidget{
                           itemCount: profileButtonsList.length,
                           itemBuilder: (BuildContext context,int index){
                             return ListTile(
+                              onTap: (){
+                                switch(index){
+                                  case 0:
+                                    Get.to(()=> OrdersScreen());
+                                    break;
+                                  case 1:
+                                    Get.to(()=> WishlistScreen());
+                                    break;
+                                  case 2:
+                                    Get.to(()=> MessageScreen());
+                                    break;
+                                }
+                              },
                               leading: Image.asset(profileButtonsIcons[index],width: 22,),
                               title: profileButtonsList[index].text.fontFamily(bold).color(darkFontGrey).make(),
                             );

@@ -1,4 +1,4 @@
-import 'package:firebase_core/firebase_core.dart';
+import                                                                                                        'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:goan_market/views/splash_screen/splash_screen.dart';
 

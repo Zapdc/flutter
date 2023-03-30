@@ -1,4 +1,3 @@
-
 import 'package:get/get.dart';
 import 'package:goan_market/consts/consts.dart';
 import 'package:goan_market/consts/lists.dart';
@@ -32,17 +31,21 @@ class ItemDetails extends StatelessWidget {
           title: title!.text.color(darkFontGrey).fontFamily(bold).make(),
           actions: [
             IconButton(onPressed: (){}, icon: const Icon(Icons.share)),
-            IconButton(onPressed: (){
-              if(controller.isFav.value){
-                controller.removeFromWishList(data.id);
-                controller.isFav(false);
-              }else{
-                controller.addToWishList(data.id);
-                controller.isFav(true);
-              }
+            Obx(()=>IconButton(
+                  onPressed: (){
+                if(controller.isFav.value){
+                  controller.removeFromWishList(data.id, context);
+                  controller.isFav(false);
+                }else{
+                  controller.addToWishList(data.id, context);
+                  controller.isFav(true);
+                }
 
-            },
-                icon: const Icon(Icons.favorite_outline)),
+              },
+                  icon: Icon(Icons.favorite,
+                  color: controller.isFav.value ? Colors.red : darkFontGrey,
+                  )),
+            ),
 
           ],
         ),
@@ -228,15 +231,20 @@ class ItemDetails extends StatelessWidget {
               child: ourButton(
                 color: Colors.redAccent,
                 onPress: (){
-                  controller.addToCart(
-                      color: data['p_colors'][controller.colorIndex.value],
-                      context: context,
-                      img: data['p_imgs'][0],
-                      qty: controller.quantity.value,
-                      sellername: data['p_seller'],
-                      title: data['p_name'],
-                      tprice: controller.totalPrice.value);
-                      VxToast.show(context, msg: "Added to cart");
+                  if(controller.quantity.value > 0){
+                    controller.addToCart(
+                        color: data['p_colors'][controller.colorIndex.value],
+                        context: context,
+                        vendorID: data['vendor_id'],
+                        img: data['p_imgs'][0],
+                        qty: controller.quantity.value,
+                        sellername: data['p_seller'],
+                        title: data['p_name'],
+                        tprice: controller.totalPrice.value);
+                    VxToast.show(context, msg: "Added to cart");
+                  }else{
+                    VxToast.show(context, msg: "Quantity can't be zero");
+                  }
                 },
                 textColor: whiteColor,
                 title: "Add to Cart"

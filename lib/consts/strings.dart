@@ -98,3 +98,7 @@ const baby1 = "Baby Boys Casual Wear",
     baby5 = "Dungaree For Baby Boys & Girls",
     baby6 = "Baby Girls Midi Length Dress";
 
+//payment methods strings
+const paypal = 'Paypal',
+    stripe = 'Stripe',
+    cod = 'Cash on delivery';

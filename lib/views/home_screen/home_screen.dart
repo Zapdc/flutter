@@ -1,7 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:goan_market/consts/consts.dart';
 import 'package:goan_market/consts/lists.dart';
+import 'package:goan_market/services/firestore_services.dart';
+import 'package:goan_market/views/category_screen/item_details.dart';
 import 'package:goan_market/views/home_screen/components/featured_button.dart';
 import 'package:goan_market/widgets_common/home_buttons.dart';
+import 'package:goan_market/widgets_common/loading_indicator.dart';
 
 class HomeScreen extends StatelessWidget{
   const HomeScreen({Key? key}) : super(key: key);
@@ -162,25 +168,36 @@ class HomeScreen extends StatelessWidget{
 
                       //all product section
                   20.heightBox,
-                  GridView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                      itemCount: 6,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 8, crossAxisSpacing: 8,mainAxisExtent: 250), itemBuilder: (context, index){
-                        return Column(
-                          // crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Image.asset(homeProductListImages[index],height: 150, width: 200, fit: BoxFit.fitHeight),
-                            10.heightBox,
-                            homeProductList[index].text.fontFamily(bold).color(darkFontGrey).make(),
-                            10.heightBox,
-                            homeProductListPrice[index].text.fontFamily(bold).color(Colors.red).size(16).make(),
-                            const Spacer(),
+                  StreamBuilder(
+                      stream: FirestoreServices.allProducts(),
+                      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
+                        if(!snapshot.hasData){
+                          return loadingIndicator();
+                        }else{
+                          var allproductsdata = snapshot.data!.docs;
+                          return GridView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: allproductsdata.length,
+                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 8, crossAxisSpacing: 8,mainAxisExtent: 250), itemBuilder: (context, index){
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Image.network(allproductsdata[index]['p_imgs'][0],height: 150, width: 200, fit: BoxFit.fitHeight),
+                                10.heightBox,
+                                '${allproductsdata[index]['p_name']}'.text.fontFamily(bold).color(darkFontGrey).make(),
+                                10.heightBox,
+                                '${allproductsdata[index]['p_price']}'.text.fontFamily(bold).color(Colors.red).size(16).make(),
+                                const Spacer(),
 
-                          ],
-                        ).box.white.margin(const EdgeInsets.symmetric(horizontal: 4)).roundedSM.padding(const EdgeInsets.all(12)).make();
-                  })
-
+                              ],
+                            ).box.white.margin(const EdgeInsets.symmetric(horizontal: 4)).roundedSM.padding(const EdgeInsets.all(12)).make().onTap(() {
+                              Get.to(()=> ItemDetails(title: '${allproductsdata[index]['p_name']}', data: allproductsdata[index],));
+                            });
+                          });
+                        }
+                      },
+                  ),
                 ],
               ),
             ),

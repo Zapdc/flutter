@@ -43,7 +43,7 @@ class ProductController extends GetxController{
   }
 
   addToCart({
-    title, img, sellername, color, qty, tprice, context
+    title, img, sellername, color, qty, tprice, context, vendorID
 }) async{
     await firestore.collection(cartCollection).doc().set({
       'title': title,
@@ -51,6 +51,7 @@ class ProductController extends GetxController{
       'sellername': sellername,
       'color': color,
       'qty': qty,
+      'vendor_id': vendorID,
       'tprice': tprice,
       'added_by': currentUser!.uid
     }).catchError((error){
@@ -64,19 +65,33 @@ class ProductController extends GetxController{
     colorIndex.value = 0;
   }
 
-  addToWishList(docId) async{
+  addToWishList(docId, context) async{
     await firestore.collection(productCollection).doc(docId).set({
       'p_wishlist': FieldValue.arrayUnion([
         currentUser!.uid
       ])
     }, SetOptions(merge: true));
+    isFav(true);
+    VxToast.show(context, msg: "Added to wishlist");
   }
 
-  removeFromWishList(docId) async{
+  removeFromWishList(docId, context) async{
     await firestore.collection(productCollection).doc(docId).set({
       'p_wishlist': FieldValue.arrayRemove([
         currentUser!.uid
       ])
     }, SetOptions(merge: true));
+
+    isFav(false);
+    VxToast.show(context, msg: "Removed from wishlist");
+
+  }
+
+  checkIfFav(data) async{
+    if(data['p_wishlist'].contains(currentUser!.uid)){
+      isFav(true);
+    }else{
+      isFav(false);
+    }
   }
 }

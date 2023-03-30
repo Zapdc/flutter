@@ -1,6 +1,6 @@
 import 'package:goan_market/consts/consts.dart';
 
-Widget detailsCard({height,width, String? count, String? title}){
+Widget detailsCard({width, String? count, String? title}){
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
@@ -8,5 +8,5 @@ Widget detailsCard({height,width, String? count, String? title}){
       2.heightBox,
       title!.text.color(darkFontGrey).make(),
     ],
-  ).box.white.rounded.width(width).height(height).padding(const EdgeInsets.all(4)).shadowSm.make();
+  ).box.white.rounded.width(width).height(55).padding(const EdgeInsets.all(4)).shadowSm.make();
 }
