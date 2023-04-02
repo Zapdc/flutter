@@ -19,16 +19,17 @@
     {
       "name": "Personal Care",
       "subcategory":[
-        "Laptop",
-        "Gaming PC",
-        "Official Equipment"
+        "Health Care",
+        "Toiletry",
+        "Hair Oil"
       ]
     },
     {
       "name": "Electronics",
       "subcategory":[
-        "Cars",
-        "Bikes"
+        "Laptop",
+        "Gaming PC",
+        "Official Equipment"
       ]
     },
     {
@@ -50,7 +51,7 @@
       ]
     },
     {
-      "name": "Smartphones",
+      "name": "Cellphone & Tab",
       "subcategory":[
         "Smartphone",
         "Tablets",

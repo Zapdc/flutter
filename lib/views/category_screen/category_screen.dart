@@ -32,8 +32,7 @@ class CategoryScreen extends StatelessWidget{
                   ],
                 ).box.white.rounded.clip(Clip.antiAlias).outerShadowLg.make().onTap(() {
                   controller.getSubCategories(categoriesList[index]);
-                  Get.to(
-                          ()=> CategoryDetails(title: categoriesList[index]));
+                  Get.to(()=> CategoryDetails(title: categoriesList[index]));
                 });
               }),
         ),

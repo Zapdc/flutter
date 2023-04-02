@@ -1,19 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:goan_market/consts/consts.dart';
 import 'package:goan_market/consts/lists.dart';
+import 'package:goan_market/controllers/home_controller.dart';
 import 'package:goan_market/services/firestore_services.dart';
 import 'package:goan_market/views/category_screen/item_details.dart';
 import 'package:goan_market/views/home_screen/components/featured_button.dart';
+import 'package:goan_market/views/home_screen/search_screen.dart';
 import 'package:goan_market/widgets_common/home_buttons.dart';
 import 'package:goan_market/widgets_common/loading_indicator.dart';
 
 class HomeScreen extends StatelessWidget{
-  const HomeScreen({Key? key}) : super(key: key);
+   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context){
+    var controller = Get.find<HomeController>();
     return Container(
       padding: const EdgeInsets.all(12),
       color: lightGrey,
@@ -26,13 +28,18 @@ class HomeScreen extends StatelessWidget{
             height: 60,
             color: lightGrey,
             child: TextFormField(
-              decoration: const InputDecoration(
+              controller: controller.searchController,
+              decoration:  InputDecoration(
                 border: InputBorder.none,
-                suffixIcon: Icon(Icons.search),
+                suffixIcon: const Icon(Icons.search).onTap(() {
+                  if(controller.searchController.text.isNotEmptyAndNotNull){
+                    Get.to(()=> SearchScreen(title: controller.searchController.text,));
+                  }
+                }),
                 filled: true,
                 fillColor: whiteColor,
                 hintText: searchanything,
-                hintStyle: TextStyle(color: textfieldGrey),
+                hintStyle: const TextStyle(color: textfieldGrey),
               ),
             ),
           ),
@@ -134,17 +141,54 @@ class HomeScreen extends StatelessWidget{
                         10.heightBox,
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: List.generate(6, (index) => Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Image.asset(featuredProductListImages[index],height: 110, width: 150, fit: BoxFit.cover,),
-                                10.heightBox,
-                                featuredProductList[index].text.fontFamily(bold).color(darkFontGrey).align(TextAlign.center).make(),
-                                10.heightBox,
-                                featuredProductListPrice[index].text.fontFamily(bold).color(Colors.red).size(16).align(TextAlign.center).make()
-                              ],
-                            ).box.white.margin(const EdgeInsets.symmetric(horizontal: 4)).roundedSM.padding(const EdgeInsets.all(8)).make()),
+                          child: FutureBuilder(
+                            future: FirestoreServices.getFeaturedProducts(),
+                            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: loadingIndicator(),
+                                );
+                              } else if (snapshot.data!.docs.isEmpty) {
+                                return 'No Featured Products!!'.text.white
+                                    .makeCentered();
+                              } else {
+
+                                var featuredData = snapshot.data!.docs;
+                                return Row(
+                                  children: List.generate(featuredData.length, (index) =>
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment
+                                            .start,
+                                        children: [
+                                          Image.network(
+                                            featuredData[index]['p_imgs'][0],
+                                            height: 130,
+                                            width: 130,
+                                            fit: BoxFit.cover,),
+                                          10.heightBox,
+                                          '${featuredData[index]['p_name']}'.text
+                                              .fontFamily(bold).color(
+                                              darkFontGrey).align(
+                                              TextAlign.center).make(),
+                                          10.heightBox,
+                                          '${featuredData[index]['p_price']}'.numCurrency.text
+                                              .fontFamily(bold).color(
+                                              Colors.red).size(16).align(
+                                              TextAlign.center).make(),
+                                          10.heightBox,
+                                        ],
+                                      ).box.white
+                                          .margin(const EdgeInsets.symmetric(
+                                          horizontal: 4))
+                                          .roundedSM
+                                          .padding(const EdgeInsets.all(8))
+                                          .make().onTap(() {
+                                        Get.to(()=> ItemDetails(title: '${featuredData[index]['p_name']}', data: featuredData[index ],));
+                                      }),
+                                  ),
+                                );
+                              }
+                            }
                           ),
                         ),
                       ],
@@ -179,7 +223,7 @@ class HomeScreen extends StatelessWidget{
                               physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemCount: allproductsdata.length,
-                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 8, crossAxisSpacing: 8,mainAxisExtent: 250), itemBuilder: (context, index){
+                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 8, crossAxisSpacing: 8,mainAxisExtent: 300), itemBuilder: (context, index){
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -192,7 +236,7 @@ class HomeScreen extends StatelessWidget{
 
                               ],
                             ).box.white.margin(const EdgeInsets.symmetric(horizontal: 4)).roundedSM.padding(const EdgeInsets.all(12)).make().onTap(() {
-                              Get.to(()=> ItemDetails(title: '${allproductsdata[index]['p_name']}', data: allproductsdata[index],));
+                              Get.to(()=> ItemDetails(title: '${allproductsdata[index]['p_name']}', data: allproductsdata[index ],));
                             });
                           });
                         }
