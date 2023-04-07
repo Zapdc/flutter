@@ -103,7 +103,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                                   10.heightBox,
 
                                 ],
-                              ).box.white.margin(const EdgeInsets.symmetric(horizontal: 4)).roundedSM.outerShadowSm.padding(const EdgeInsets.all(12)).make().onTap(() {
+                              ).box.white.margin(const EdgeInsets.symmetric(horizontal: 4)).roundedSM.outerShadowSm.padding(const EdgeInsets.all(6)).make().onTap(() {
                                 controller.checkIfFav(data[index]);
                                 Get.to(()=> ItemDetails(title: "${data[index]['p_name']}",data: data[index],
                                 ),
