@@ -57,9 +57,9 @@ class ProfileScreen extends StatelessWidget{
 
                           data['imageUrl'] == '' ?
 
-                          Image.asset(imgProfile2, width: 100,fit: BoxFit.cover).box.roundedFull.clip(Clip.antiAlias).make()
+                          Image.asset(imgProfile2, width: 70,fit: BoxFit.cover).box.roundedFull.clip(Clip.antiAlias).make()
                               :
-                          Image.network(data['imageUrl'], width: 100,fit: BoxFit.cover).box.roundedFull.clip(Clip.antiAlias).make(),
+                          Image.network(data['imageUrl'], width: 90,fit: BoxFit.cover).box.roundedFull.clip(Clip.antiAlias).make(),
                           10.widthBox,
                           Expanded(child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

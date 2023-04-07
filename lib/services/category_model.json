@@ -3,7 +3,7 @@
     {
       "name": "Women Clothing",
       "subcategory": [
-        "Weeding & Events",
+        "Wedding & Events",
         "Tops & Sets",
         "Watches"
       ]
@@ -46,7 +46,7 @@
       "subcategory":[
         "Necklace",
         "Gold",
-        "Earing"
+        "Earring"
 
       ]
     },
@@ -62,9 +62,9 @@
     {
       "name": "Appliances",
       "subcategory":[
-        "Sofa",
-        "Bed",
-        "Home Textile"
+        "Refrigerator",
+        "Washing Machine",
+        "Air Conditioner"
 
       ]
     },
