@@ -55,7 +55,7 @@ class CartController extends GetxController{
       'order_on_delivery': false,
       'total_amount': totalAmount,
       'orders': FieldValue.arrayUnion(products),
-      'vendors': FieldValue.arrayUnion([vendors]),
+      'vendors': FieldValue.arrayUnion(vendors),
     });
     placingOrder(false);
   }
