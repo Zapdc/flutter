@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:goan_market/consts/consts.dart';
 import 'package:goan_market/services/firestore_services.dart';
 import 'package:goan_market/widgets_common/loading_indicator.dart';

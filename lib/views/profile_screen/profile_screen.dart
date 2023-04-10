@@ -84,24 +84,24 @@ class ProfileScreen extends StatelessWidget{
                       ),
 
                       20.heightBox,
-                      
+
                       FutureBuilder(
-                          future: FirestoreServices.getCounts(),
-                          builder: (BuildContext context, AsyncSnapshot snapshot){
-                            if(!snapshot.hasData){
-                              return Center(child: loadingIndicator());
-                            }else{
-                              var countData = snapshot.data;
-                              return Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  detailsCard(count: countData[0].toString(),title: "In your cart",width: context.screenWidth/3.3),
-                                  detailsCard(count: countData[1].toString(),title: "In your wishlist",width: context.screenWidth/3.3),
-                                  detailsCard(count: countData[2].toString(),title: "Your orders",width: context.screenWidth/3.3),
-                                ],
-                              );
-                            }
-                          },),
+                        future: FirestoreServices.getCounts(),
+                        builder: (BuildContext context, AsyncSnapshot snapshot){
+                          if(!snapshot.hasData){
+                            return Center(child: loadingIndicator());
+                          }else{
+                            var countData = snapshot.data;
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                detailsCard(count: countData[0].toString(),title: "In your cart",width: context.screenWidth/3.3),
+                                detailsCard(count: countData[1].toString(),title: "In your wishlist",width: context.screenWidth/3.3),
+                                detailsCard(count: countData[2].toString(),title: "Your orders",width: context.screenWidth/3.3),
+                              ],
+                            );
+                          }
+                        },),
                       // Row(
                       //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       //   children: [

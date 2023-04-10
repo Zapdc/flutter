@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:goan_market/consts/consts.dart';
 import 'package:goan_market/services/firestore_services.dart';
 import 'package:goan_market/views/orders_screen/orders_details.dart';

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:get/get.dart';
 import 'package:goan_market/consts/consts.dart';
 import 'package:goan_market/controllers/profile_controller.dart';

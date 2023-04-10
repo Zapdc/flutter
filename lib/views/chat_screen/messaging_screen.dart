@@ -34,7 +34,7 @@ class MessageScreen extends StatelessWidget {
                         return Card(
                           child: ListTile(
                             onTap: (){
-                              Get.to(()=> ChatScreen(),arguments: [data[index]['friend_name'], data[index]['toId']]);
+                              Get.to(()=> const ChatScreen(),arguments: [data[index]['friend_name'], data[index]['toId']]);
                             },
                             leading: const CircleAvatar(
                               backgroundColor: blueColor,

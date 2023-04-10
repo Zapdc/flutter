@@ -5,6 +5,7 @@ import 'package:goan_market/controllers/product_controller.dart';
 import 'package:goan_market/views/chat_screen/chat_screen.dart';
 import 'package:goan_market/widgets_common/our_button.dart';
 
+
 class ItemDetails extends StatelessWidget {
   final String? title;
   final dynamic data;

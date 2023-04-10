@@ -171,7 +171,7 @@ class HomeScreen extends StatelessWidget{
                                               darkFontGrey).align(
                                               TextAlign.center).make(),
                                           10.heightBox,
-                                          '${featuredData[index]['p_price']}'.numCurrency.text
+                                          " ${featuredData[index]['p_price']}".numCurrency.text
                                               .fontFamily(bold).color(
                                               Colors.red).size(16).align(
                                               TextAlign.center).make(),

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:goan_market/consts/consts.dart';
- import 'package:goan_market/controllers/product_controller.dart';
+import 'package:goan_market/controllers/product_controller.dart';
 import 'package:goan_market/services/firestore_services.dart';
 import 'package:goan_market/views/category_screen/item_details.dart';
 import 'package:goan_market/widgets_common/bg_widget.dart';
@@ -31,7 +31,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
     }
   }
 
-  var controller = Get.find<ProductController>();
+  var controller = Get.put(ProductController());
 
   dynamic productMethod;
   @override
